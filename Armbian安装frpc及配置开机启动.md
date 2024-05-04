@@ -8,7 +8,7 @@
 
 1. 下载 [frp](https://github.com/fatedier/frp/releases), 选择与 frps 相匹的版本, 选 arm64 架构(例 frp_0.51.3_linux_arm64.tar)
 2. 解压 `tar -zxvf frp_0.51.3_linux_arm64.tar`
-3. 移动 `mkdir /opt/frpc && mv frp_0.48.0_linux_arm64/frpc /opt/frpc/`
+3. 移动 `mkdir /opt/frpc && mv frp_0.51.3_linux_arm64/frpc /opt/frpc/`
 4. 配置 `cd /opt/frpc && vim frpc.ini`
 5. 启动 `/opt/frpc/frpc -c /opt/frpc/frpc.ini`
 
