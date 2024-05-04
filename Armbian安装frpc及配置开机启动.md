@@ -1,12 +1,12 @@
-# Armbian 安装 frpc 及开机启动
+# Armbian 安装 frpc 及配置开机启动
 
 ## 背景
 
-在 Armbian 中安装 frp 客户端即 frpc，并配置开机启动，文档目的是开机启动，非 frp 详细教程
+在 Armbian 中安装 frp 客户端即 frpc, 并配置开机启动, 文档目的是开机启动, 非 frp 详细教程
 
 ## 安装
 
-1. 在 Armbian 中下载 [frp](https://github.com/fatedier/frp/releases) ,选择与 frps 相匹的版本, 选 arm64 架构(例 frp_0.51.3_linux_arm64.tar)
+1. 在 Armbian 中下载 [frp](https://github.com/fatedier/frp/releases), 选择与 frps 相匹的版本, 选 arm64 架构(例 frp_0.51.3_linux_arm64.tar)
 2. 解压 `tar -zxvf frp_0.51.3_linux_arm64.tar`
 3. 移动 `mkdir /opt/frpc && mv frp_0.48.0_linux_arm64/frpc /opt/frpc/`
 4. 配置 `cd /opt/frpc && vim frpc.ini`
@@ -16,19 +16,15 @@
 
 ### 方式一
 
-创建系统服务方式
-
-1. 创建 frpc.service 服务文件
+创建 frpc.service 服务文件
 
 ```
 vim /etc/systemd/system/frpc.service
 ```
 
-内容
-
 ```
 [Unit]
-# 服务名称，可自定义
+# 服务名称, 可自定义
 Description = frp client
 After = network.target syslog.target
 Wants = network.target
@@ -37,15 +33,14 @@ Wants = network.target
 Type = simple
 Restart=on-failure
 RestartSec=60s
-# 启动frps的命令，需修改为您的frpc的安装路径
+# 启动frps的命令, 需修改为您的frpc的安装路径
 ExecStart = /opt/frpc/frpc -c /opt/frpc/frpc.ini
 
 [Install]
 WantedBy = multi-user.target
 ```
 
-2. 并且设置文件权限为可执行
-3. 配置开机自启动
+配置开机自启动
 
 ```
 systemctl enable frpc
@@ -71,7 +66,7 @@ systemctl status frpc
 
 开机启动脚本中添加命令
 
-1. 添加配置
+添加配置
 
 ```
 vim /lib/systemd/system/rc.local.service
@@ -85,9 +80,7 @@ WantedBy=multi-user.target
 Alias=rc-local.service
 ```
 
-2. 添加启动脚本
-
-然后就在/etc/rc.local 中添加需要的开机启动脚本，脚本要写在 exit 0 的前面
+然后就在/etc/rc.local 中添加需要的开机启动脚本, 脚本要写在 exit 0 的前面
 
 ```
 vim /etc/rc.local

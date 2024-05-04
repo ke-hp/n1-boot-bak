@@ -25,7 +25,7 @@ macOS 下 N1 盒子降级及刷 Armbian
 6. 鼠标连续点击 N1 盒子版本号位置 4 下, 打开盒子的 adb 服务(版本号低于 2.20, 不需要降级)
 7. mac 安装 adb, 终端下执行
    ```
-    brew install android-platform-tools
+   brew install android-platform-tools
    ```
 8. 进入 fastboot 模式, 在终端下分别执行
 
@@ -51,7 +51,7 @@ macOS 下 N1 盒子降级及刷 Armbian
 
 10. 重启, 终端执行
     ```
-     fastboot reboot
+    fastboot reboot
     ```
 
 ## 制作系统盘
@@ -65,7 +65,7 @@ macOS 下 N1 盒子降级及刷 Armbian
 2. 在端上预输入如下命令, 先别执行
 
    ```
-      adb shell reboot update
+   adb shell reboot update
    ```
 
 3. 准备敲回车和准备插入 U 盘, 敲击回车, 在显示器黑屏的那一刹那把 U 盘插入; 如没有进入 Linux 系统, 重试
@@ -75,7 +75,7 @@ macOS 下 N1 盒子降级及刷 Armbian
 
 1. 进入系统后执行
    ```
-       nand–sata-install
+   nand–sata-install
    ```
 2. 按提示选择或填写相关信息即可
 
