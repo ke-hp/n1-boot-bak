@@ -6,20 +6,25 @@
 
 ## 安装
 
-1. 下载 [frp](https://github.com/fatedier/frp/releases) 选择跟你 frps 相对版本号架构类型 arm64
-2. 在 N1 中解压到指定文件夹，比如 ` /opt/frp`
-3. 按需配置 `cd /opt/frpc && vim frpc.ini`
-4. 启动 `/opt/frpc/frpc -c /opt/frpc/frpc.ini`
+1. 在 Armbian 中下载 [frp](https://github.com/fatedier/frp/releases) ,选择与 frps 相匹的版本, 选 arm64 架构(例 frp_0.51.3_linux_arm64.tar)
+2. 解压 `tar -zxvf frp_0.51.3_linux_arm64.tar`
+3. 移动 `mkdir /opt/frpc && mv frp_0.48.0_linux_arm64/frpc /opt/frpc/`
+4. 配置 `cd /opt/frpc && vim frpc.ini`
+5. 启动 `/opt/frpc/frpc -c /opt/frpc/frpc.ini`
 
 ## 配置开机启动
 
-方式一
+### 方式一
 
-创建系统服务（适用于 Armbian）
+创建系统服务方式
 
-先创建 frpc.service 文件
+1. 创建 frpc.service 服务文件
 
+```
 vim /etc/systemd/system/frpc.service
+```
+
+内容
 
 ```
 [Unit]
@@ -39,28 +44,38 @@ ExecStart = /opt/frpc/frpc -c /opt/frpc/frpc.ini
 WantedBy = multi-user.target
 ```
 
-并且设置文件权限为可执行，并且需要关闭 selinux
+2. 并且设置文件权限为可执行
+3. 配置开机自启动
 
-配置开机自启动
-
+```
 systemctl enable frpc
+```
 
-使用 systemd 命令管理 frpc
+systemd 命令管理 frpc
 
 ```
 # 启动frpc
 systemctl start frpc
+
 # 停止frpc
 systemctl stop frpc
+
 # 重启frpc
 systemctl restart frpc
+
 # 查看frpc状态
 systemctl status frpc
 ```
 
-方式二
+### 方式二
 
-`vim /lib/systemd/system/rc.local.service`
+开机启动脚本中添加命令
+
+1. 添加配置
+
+```
+vim /lib/systemd/system/rc.local.service
+```
 
 在后面添加
 
@@ -70,12 +85,19 @@ WantedBy=multi-user.target
 Alias=rc-local.service
 ```
 
+2. 添加启动脚本
+
 然后就在/etc/rc.local 中添加需要的开机启动脚本，脚本要写在 exit 0 的前面
 
-`vim /etc/rc.local`
+```
+vim /etc/rc.local
+```
+
+exit 0 的前添加
 
 ```
 nohup /opt/frpc/frpc -c /opt/frpc/frpc.ini >output 2>&1 &
+
 ```
 
 ## 参考链接
