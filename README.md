@@ -1,4 +1,4 @@
-macOS 下 N1 盒子降级及刷 Armbian
+# macOS 下 N1 盒子降级及刷 Armbian
 
 ## 先决条件
 

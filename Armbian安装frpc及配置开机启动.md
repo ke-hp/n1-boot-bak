@@ -2,11 +2,11 @@
 
 ## 背景
 
-在 Armbian 中安装 frp 客户端即 frpc, 并配置开机启动, 文档目的是开机启动, 非 frp 详细教程
+在 Armbian 中安装 frp 客户端即 frpc, 并配置配置开机启动, 文档目的是安装及配置开机启动, 非 frp 详细教程
 
 ## 安装
 
-1. 在 Armbian 中下载 [frp](https://github.com/fatedier/frp/releases), 选择与 frps 相匹的版本, 选 arm64 架构(例 frp_0.51.3_linux_arm64.tar)
+1. 下载 [frp](https://github.com/fatedier/frp/releases), 选择与 frps 相匹的版本, 选 arm64 架构(例 frp_0.51.3_linux_arm64.tar)
 2. 解压 `tar -zxvf frp_0.51.3_linux_arm64.tar`
 3. 移动 `mkdir /opt/frpc && mv frp_0.48.0_linux_arm64/frpc /opt/frpc/`
 4. 配置 `cd /opt/frpc && vim frpc.ini`
