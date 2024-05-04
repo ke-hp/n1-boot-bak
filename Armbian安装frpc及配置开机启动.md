@@ -80,13 +80,13 @@ WantedBy=multi-user.target
 Alias=rc-local.service
 ```
 
-然后就在/etc/rc.local 中添加需要的开机启动脚本, 脚本要写在 exit 0 的前面
+在/etc/rc.local 中添加开机启动脚本
 
 ```
 vim /etc/rc.local
 ```
 
-exit 0 的前添加
+exit 0 前添加
 
 ```
 nohup /opt/frpc/frpc -c /opt/frpc/frpc.ini >output 2>&1 &
