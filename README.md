@@ -13,60 +13,62 @@ macOS 下 N1 盒子降级及刷 Armbian
 
 ## 背景
 
-在 macOS 下对 N1 盒子进行降级及刷入 Armbian 系统,在 windows 下则使用「官方降级工具」
+在 macOS 下对 N1 盒子进行降级及刷入 Armbian 系统，在 windows 下则使用「官方降级工具」
 
 ## 降级
 
 1. N1 接网线接路由器，确保电脑网络及盒子网络处于同一网段
 2. N1 接鼠标（注意：使用靠近 HDMI 接口的 USB 口）
 3. N1 接 USB 双公头线连接到电脑
-4. N1 接 HDMI 线连接显示器，上电，记录下来 N1 盒子的 ip
-5. 鼠标连续点击 N1 盒子版本号位置 4 下，打开盒子的 adb 服务（版本号低于 2.20，不需要降级）
-6. mac 安装 adb，终端下执行
+4. N1 接 HDMI 线连接显示器
+5. 上电，记录 N1 盒子 ip
+6. 鼠标连续点击 N1 盒子版本号位置 4 下，打开盒子的 adb 服务（版本号低于 2.20，不需要降级）
+7. mac 安装 adb，终端下执行
    ```
-       brew install android-platform-tools
+    brew install android-platform-tools
    ```
-7. 进入 fastboot 模式, 在终端下分别执行
-
-   N1_IP 替换为步骤 3 的 ip 地址
-
-   ```
-    adb connect $N1_IP
-
-    adb shell reboot fastboot
-   ```
-
-8. 刷入 boot 等固件，等 N1 重启后，在终端分别执行执行（文件在降级包中）
+8. 进入 fastboot 模式，在终端下分别执行
+   N1_IP 替换为步骤 5 的 ip 地址
 
    ```
-    fastboot flash boot boot.img
-    fastboot flash bootloader bootloader.img
-    fastboot flash recovery recovery.img
+   adb connect $N1_IP
+
+   adb shell reboot fastboot
+   ```
+
+9. 刷入 boot 等固件，等 N1 重启后，在终端分别执行执行（文件在降级包中）
+
+   ```
+   fastboot flash boot boot.img
+
+   fastboot flash bootloader bootloader.img
+
+   fastboot flash recovery recovery.img
    ```
 
    如果出现 < waiting for any device > 则排除双公头线是不是接通或者换一条或者重启
 
-9. 重启, 终端执行
-   ```
-    fastboot reboot
-   ```
+10. 重启，终端执行
+    ```
+     fastboot reboot
+    ```
 
 ## 制作系统盘
 
-1. 下载 Armbian 镜像 https://github.com/ophub/amlogic-s9xxx-armbian/releases （选择 s905d）
+1. [下载 Armbian 镜像](https://github.com/ophub/amlogic-s9xxx-armbian/releases)（选择 s905d）
 2. mac 接入 U 盘，使用 balenaEtcher 制作镜像
 
 ## 启动系统盘
 
-1. 把鼠标拔下来，刷机线别拔。这块需要注意的是要留出离 HDMI 接口近的那个接口，因为实践中发现只有这个 USB 口可以加载 U 盘里的系统
-2. 在端上预输入如下命令，但先别回车执行
+1. 鼠标拔出（注意：双公 USB 线勿动，留出离 HDMI 接口近的那个接口在后面步骤插入 U 盘）
+2. 在端上预输入如下命令，先别执行
 
    ```
       adb shell reboot update
    ```
 
-3. 一只手准备敲回车，另一只手准备好插入 U 盘; 敲击回车; 然后另一只手再以迅雷不及掩耳响叮当之势在黑屏的那一刹那把 U 盘插进去; 如果没有进入 Linux 系统，请重试
-4. 如果显示器显示进入系统，则可以进行修改账号和密码 (默认账号 root，密码 1234)
+3. 准备敲回车和准备插入 U 盘, 敲击回车, 在显示器黑屏的那一刹那把 U 盘插入; 如果没有进入 Linux 系统，请重试
+4. 进入系统，修改账号和密码（默认账密 root 1234）
 
 ## 将系统写入 EMMC
 
